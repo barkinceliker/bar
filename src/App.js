@@ -1,21 +1,16 @@
-/* global __app_id, __firebase_config, __initial_auth_token */
-import React, { useState, useEffect, createContext, useContext } from 'react';
-// Firebase importları kaldırıldı
-// import { initializeApp } from 'firebase/app';
-// import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-// import { getFirestore, collection, getDocs, addDoc, serverTimestamp, doc, setDoc } from 'firebase/firestore';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+/* global __app_id */ // Sadece kullanılan global değişkeni tutuldu
+import React, { useState, useEffect } from 'react';
+// Firebase importları tamamen kaldırıldı
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'; // Sadece kullanılan recharts bileşenleri tutuldu
 
 
-// Global variables provided by the Canvas environment (Firebase kaldırıldığı için artık kullanılmıyor ama uyumluluk için bırakıldı)
+// Global variables provided by the Canvas environment (Firebase kaldırıldığı için artık kullanılmıyor ama appId hala kullanılıyor)
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-// const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}'); // Firebase kaldırıldığı için kaldırıldı
-// const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; // Firebase kaldırıldığı için kaldırıldı
+// __firebase_config ve __initial_auth_token kaldırıldı
+
 
 // FirebaseContext ve FirebaseProvider kaldırıldı, çünkü Firebase artık kullanılmıyor.
-// const FirebaseContext = createContext(null);
-// const useFirebase = () => useContext(FirebaseContext);
-// const FirebaseProvider = ({ children }) => { /* ... */ };
 
 // --- Components ---
 
@@ -177,7 +172,7 @@ const Checkout = ({ cart, onPlaceOrder, onBackToCart }) => {
 
             <div style={checkoutActionsStyle}>
                 <p style={checkoutMessageStyle}>
-                    Bu bir ödeme simülasyonudur. Gerçek bir uygulama için güvenli bir ödeme ağ geçidi entegrasyonu gereklidir.
+                    This is a payment simulation. A secure payment gateway integration is required for a real application.
                 </p>
                 <button
                     onClick={handlePlaceOrderClick}
@@ -295,7 +290,6 @@ const AdminLogin = ({ onLoginSuccess, onMessage }) => {
 
 // --- Analytics Dashboard Component ---
 const AnalyticsDashboard = () => {
-    // const { db, isAuthReady } = useFirebase(); // Firebase kaldırıldığı için kaldırıldı
     const [analysisResult, setAnalysisResult] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -345,19 +339,11 @@ const AnalyticsDashboard = () => {
     // --- Analytics Functions ---
 
     const analyzeDailySales = async () => {
-        // if (!db || !isAuthReady) { // Firebase kaldırıldığı için kaldırıldı
-        //     setError("Veritabanı hazır değil.");
-        //     return;
-        // }
         setAnalysisResult('');
         setLoading(true);
         setChartData(null);
         setChartType(null);
         try {
-            // const ordersCollectionRef = collection(db, `artifacts/${appId}/public/data/orders`); // Firebase kaldırıldığı için kaldırıldı
-            // const orderSnapshot = await getDocs(ordersCollectionRef); // Firebase kaldırıldığı için kaldırıldı
-            // const orders = orderSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); // Firebase kaldırıldığı için kaldırıldı
-
             // Simüle edilmiş sipariş verisi
             const orders = [
                 { id: 'order1', totalAmount: 150, orderDate: new Date('2024-05-28T10:00:00Z'), items: [{ name: 'Espresso', quantity: 2 }, { name: 'Kruvasan', quantity: 1 }] },
@@ -437,10 +423,6 @@ SATIŞ_VERİLERİ:`;
     };
 
     const analyzeProductProfitability = async () => {
-        // if (!db || !isAuthReady) { // Firebase kaldırıldığı için kaldırıldı
-        //     setError("Veritabanı hazır değil.");
-        //     return;
-        // }
         setAnalysisResult('');
         setLoading(true);
         setChartData(null);
@@ -512,10 +494,6 @@ SATIŞ_VERİLERİ:`;
     };
 
     const analyzeCustomerBehavior = async () => {
-        // if (!db || !isAuthReady) { // Firebase kaldırıldığı için kaldırıldı
-        //     setError("Veritabanı hazır değil.");
-        //     return;
-        // }
         setAnalysisResult('');
         setLoading(true);
         setChartData(null);
@@ -626,10 +604,6 @@ SATIŞ_VERİLERİ:`;
     };
 
     const suggestCampaignAndMenu = async () => {
-        // if (!db || !isAuthReady) { // Firebase kaldırıldığı için kaldırıldı
-        //     setError("Veritabanı hazır değil.");
-        //     return;
-        // }
         setAnalysisResult('');
         setLoading(true);
         setChartData(null);
@@ -884,6 +858,7 @@ const primaryButtonStyle = {
     ...baseButtonStyle,
     background: 'linear-gradient(45deg, #007bff, #0056b3)', // Mavi gradyan
     color: 'white',
+    // Hover effect using a function to allow dynamic styles
     ':hover': {
         background: 'linear-gradient(45deg, #0056b3, #007bff)', // Hover'da gradyan değişimi
         transform: 'translateY(-3px)', // Hafif yukarı hareket
@@ -1511,8 +1486,8 @@ const chartTitleStyle = {
     textAlign: 'center',
 };
 
-// Recharts Pie Chart Colors
-const PIE_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1942'];
+// Recharts Pie Chart Colors (kullanılmadığı için kaldırıldı)
+// const PIE_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1942'];
 
 // Admin Login Specific Styles
 const adminLoginContainerStyle = {
@@ -1535,8 +1510,6 @@ const adminLoginTitleStyle = {
 
 // Main App Component
 function App() {
-    // Firebase bağımlılıkları kaldırıldı
-    // const { db, auth, userId, isAuthReady, firebaseError } = useFirebase();
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [currentView, setCurrentView] = useState('products'); // 'products', 'cart', 'checkout', 'confirmation', 'analytics', 'adminLogin'
@@ -1546,7 +1519,7 @@ function App() {
     const [adminLoggedIn, setAdminLoggedIn] = useState(false); // New state for admin login status
 
     // Firebase kaldırıldığı için userId direkt burada oluşturuldu
-    const [userId, setUserId] = useState(crypto.randomUUID());
+    const [userId] = useState(crypto.randomUUID()); // setUserId kaldırıldı, çünkü doğrudan kullanılmıyor
 
     // Effect to update screenWidth on resize
     useEffect(() => {
@@ -1561,9 +1534,6 @@ function App() {
 
     // Yönetici oturum durumu artık Firebase'e bağlı değil
     useEffect(() => {
-        // if (!isAuthReady) { // Firebase kaldırıldığı için kaldırıldı
-        //     setAdminLoggedIn(false);
-        // }
     }, []);
 
 
@@ -1672,9 +1642,6 @@ function App() {
 
     // Render different views based on currentView state
     const renderView = () => {
-        // Firebase hata kontrolü kaldırıldı
-        // if (firebaseError) { /* ... */ }
-
         switch (currentView) {
             case 'products':
                 return <ProductList products={products} onAddToCart={handleAddToCart} />;
@@ -1787,7 +1754,6 @@ function App() {
             )}
 
             <main style={mainContentStyle}>
-                {/* isAuthReady kontrolü kaldırıldı, çünkü Firebase yok */}
                 {renderView()}
             </main>
 
@@ -1802,7 +1768,6 @@ function App() {
 }
 
 export default function AppWrapper() {
-    // FirebaseProvider kaldırıldığı için App direkt döndürüldü
     return (
         <App />
     );
